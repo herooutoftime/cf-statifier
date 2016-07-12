@@ -49,7 +49,6 @@ Files will be written to the following directories (depending on your settings):
 * Form & unprocessed mail(s): `[STYLESHEET_DIRECTORY]/cf_static`
 * Processed mail(s): `[STYLESHEET_DIRECTORY]/cf_static/cf7_proc`
 
-
 For compatibility with common mail-clients (e.g. Outlook, Gmail, Apple Mail) you are able to set `static_file_[MAIL_ID]_premailer: yes`
 When saving (via WP-Admin) a folder with the processed contents of each mail will be stored and fetched on submit.
 
