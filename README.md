@@ -1,4 +1,4 @@
-=== CF7 Static Form & Mail Content ===
+# CF7 Static Form & Mail Content
 Contributors: herooutoftime
 Donate link: http://www.herooutoftime.com
 Tags: contact form, contact form 7, cf7
@@ -10,7 +10,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Make CF7 (ContactForm 7) form & emails served via static files
 
-== Description ==
+## Description
 
 This plugin was written to ease the work with Contact Form 7, one of the most popular Wordpress plugins,
 by making all HTML related content available through static files. By placing additional settings in each
@@ -18,14 +18,12 @@ form you can decide to *statify* your form & email contents.
 
 **Plus: You can enable `premailer` to inline all your CSS automatically**
 
-
-
-== Installation ==
+## Installation
 
 1. Upload `cf7-statifier.php` to the `/wp-content/plugins/` directory
 1. Activate the plugin through the 'Plugins' menu in WordPress
 
-== Usage ==
+## Usage
 
 1. Add additional settings to each CF7-form
 
@@ -52,16 +50,15 @@ Files will be written to the following directories (depending on your settings):
 For compatibility with common mail-clients (e.g. Outlook, Gmail, Apple Mail) you are able to set `static_file_[MAIL_ID]_premailer: yes`
 When saving (via WP-Admin) a folder with the processed contents of each mail will be stored and fetched on submit.
 
-== Frequently Asked Questions ==
+## Frequently Asked Questions
 
-= Where should I store my static files for CF7? =
+* **Q**: Where should I store my static files for CF7?
+* **A**: The plugin searches for static files in your theme's directory via `get_stylesheet_directory()`
 
-The plugin searches for static files in your theme's directory via `get_stylesheet_directory()`
 
+## Changelog
 
-== Changelog ==
-
-= 1.0 =
+### 1.0
 * Basic version
 
-== Upgrade Notice ==
+## Upgrade Notice
