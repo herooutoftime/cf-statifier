@@ -1,0 +1,28 @@
+$TTL 86400
+@   IN SOA ns1.first-ns.de. postmaster.robot.first-ns.de. (
+    2016071200   ; serial
+    14400        ; refresh
+    1800         ; retry
+    604800       ; expire
+    86400 )      ; minimum
+
+@                        IN NS      robotns3.second-ns.com.
+@                        IN NS      robotns2.second-ns.de.
+@                        IN NS      ns1.first-ns.de.
+
+@                        IN A       88.198.204.121
+*                        IN A       88.198.204.121
+localhost                IN A       127.0.0.1
+mail                     IN A       88.198.204.121
+www                      IN A       88.198.204.121
+ftp                      IN CNAME   www
+imap                     IN CNAME   www
+loopback                 IN CNAME   localhost
+pop                      IN CNAME   www
+relay                    IN CNAME   www
+smtp                     IN CNAME   www
+@                        IN MX 10   mail
+@                  10800 IN TXT     "v=spf1 a -all"
+_domainkey		10800 IN TXT "o=~; r=postmaster@herooutoftime.com"
+mail._domainkey	10800 IN TXT "v=DKIM1; k=rsa; p=" "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAs0UkT6X+KIYhfuvvw" "MNib4fyIEVuxjKRzy+qcVZx6CX1+Qv2FFCqaYrkqb/g9UUldwfyIDDzWuUgUS" "T41o/J1PUP0mgMwFzmWqXnsXQxRWBwHNOVS8FgAu23iXQIOGMXlVT6pY3FxJY" "dO+6vtkPCRK4hverFbR7I6TblSWmHpanC/ZJemOOKNBelQWOIuAV2zt+XfsGc" "PXHWm4ZJcwwJj3+XfG7BDvgOPI8GZUwbxNcR2mbBn4tBjVXJcSBLJAcC4pzKE" "z3PplkZH8uEiNWPvR0z/jzEYje633Y+Zk75yiVraRnXSIOqA/A2UdeQroaaka" "IOXKF5TiZa0pgH7lAQjQIDAQAB"
+_dmarc			10800 IN TXT "v=DMARC1; p=quarantine"
