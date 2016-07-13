@@ -38,6 +38,22 @@ static_file_mail_2: yes
 static_file_mail_2_premailer: yes
 ```
 
+### Premailer
+
+CF7-Statifier implements all options available through [Premailer-API](http://premailer.dialect.ca/api)
+
+```
+static_file_premailer_fetchresult: yes | no
+static_file_premailer_adaptor: nokogiri | hpricot
+static_file_premailer_base_url: http://www.example.com
+static_file_premailer_line_length: 75
+static_file_premailer_link_query_string: ?utm_source=newsletter&utm_medium=email&utm_campaign=mycampaign
+static_file_premailer_preserve_styles: yes | no
+static_file_premailer_remove_ids: no | yes
+static_file_premailer_remove_classes: no | yes
+static_file_premailer_remove_comments: no | yes
+```
+
 The plugin listens to several actions:
 * `wpcf7_after_save`: Saves the static file(s) and creates, if set, processed mail(s)
 * `wpcf7_before_send_mail`: Fetches the static mail(s)

@@ -193,7 +193,32 @@ class Cf7_Statifier_Admin {
 
 	public function store_processed($fp, $content, $cf)
 	{
-		$_proc = Premailer::html($content);
+		$prefix = 'static_file_premailer_';
+
+		$options = array(
+			'html' => '',
+			'fetchresult'=> true,
+			'adaptor'=> 'hpricot',
+			'base_url'=> '',
+			'line_length'=> 65,
+			'link_query_string'=> '',
+			'preserve_styles'=> true,
+			'remove_ids'=> false,
+			'remove_classes'=> false,
+			'remove_comments'=> false
+		);
+		$boolean = array('yes', 'no');
+		foreach ($options as $option => $default) {
+			$value = $cf->additional_setting($prefix . $option)[0];
+			if(is_null($value))
+				continue;
+			$value = in_array($value, $boolean) ? filter_var($value, FILTER_VALIDATE_BOOLEAN) : $value;
+			$attr[$option] = $value;
+		}
+		$attr['html'] = $content;
+		$attr = array_merge($options, $attr);
+		$_proc = call_user_func_array(array('Premailer', 'html'), $attr);
+		
 		$fi = pathinfo($fp);
 		$suffix = self::PROC_DIR/* . $cf->id . '/'*/;
 		$proc_dir_path = trailingslashit($fi['dirname']) . $suffix;
