@@ -18,6 +18,8 @@ form you can decide to *statify* your form & email contents.
 
 **Plus: You can enable `premailer` to inline all your CSS automatically**
 
+**This plugin is in an early stage. Please use with caution**
+
 ## Installation
 
 1. Upload/Clone `cf7-statifier` to the `/wp-content/plugins/` directory
