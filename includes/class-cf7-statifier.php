@@ -156,8 +156,11 @@ class Cf7_Statifier {
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 
+//		$this->loader->add_action( 'wpcf7_init', $plugin_admin, 'init' );
 		$this->loader->add_action( 'wpcf7_after_save', $plugin_admin, 'after_save' );
 		$this->loader->add_filter( 'wpcf7_contact_form_properties', $plugin_admin, 'contact_form_properties', 10, 2 );
+		$this->loader->add_filter( 'wpcf7_editor_panels', $plugin_admin, 'editor_panels' );
+
 	}
 
 	/**

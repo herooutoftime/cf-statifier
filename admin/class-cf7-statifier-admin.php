@@ -66,8 +66,6 @@ class Cf7_Statifier_Admin {
 
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
-		$this->static_path = trailingslashit(get_stylesheet_directory()) . self::STATIC_DIR;
-		$this->static_path_proc = trailingslashit($this->static_path) . self::PROC_DIR;
 	}
 
 	/**
@@ -112,12 +110,20 @@ class Cf7_Statifier_Admin {
 		 * class.
 		 */
 
-//		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/cf7-statifier-admin.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/cf7-statifier-admin.js', array( 'jquery' ), $this->version, false );
 
+	}
+
+	public function init()
+	{
+//		$this->static_path = trailingslashit(get_stylesheet_directory()) . self::STATIC_DIR;
+//		$this->static_path_proc = trailingslashit($this->static_path) . self::PROC_DIR;
 	}
 
 	public function contact_form_properties($properties, $t) {
 		$this->cf7_additional_settings = $properties['additional_settings'];
+		$this->static_path = trailingslashit(get_stylesheet_directory() . '/' . self::STATIC_DIR . $t->id);
+
 		if(
 			filter_var(reset($this->get_cf7_additional_setting('passthrough', 1)), FILTER_VALIDATE_BOOLEAN) ||
 			$_POST['action'] == 'save' ||
@@ -125,8 +131,7 @@ class Cf7_Statifier_Admin {
 		)
 			return $properties;
 
-		$statics = self::STATICS;
-		foreach ($statics as $key => $prop) {
+		foreach (self::STATICS as $key => $prop) {
 			$static_file = $this->static_path . $key . self::STATIC_EXT;
 			// Check if we are dealing with a static file reference
 			if(file_exists($static_file)) {
@@ -143,6 +148,7 @@ class Cf7_Statifier_Admin {
 	public function after_save($t)
 	{
 		$oldmask = umask(0);
+		$this->static_path = trailingslashit($this->static_path);
 		foreach (self::STATICS as $key => $prop) {
 			if(!filter_var($this->get_cf7_additional_setting('static_file_' . $key, 1)[0], FILTER_VALIDATE_BOOLEAN))
 				continue;
@@ -175,11 +181,21 @@ class Cf7_Statifier_Admin {
 		umask($oldmask);
 	}
 
+	public function editor_panels($panels)
+	{
+		$relevant = array('form-panel', 'mail-panel');
+		foreach ($panels as $key => &$panel) {
+			if(in_array($key, $relevant))
+				$panel['title'] = $panel['title'] . ' *';
+		}
+		return $panels;
+	}
+
 	public function store_processed($fp, $content, $cf)
 	{
 		$_proc = Premailer::html($content);
 		$fi = pathinfo($fp);
-		$suffix = self::PROC_DIR . $cf->id . '/';
+		$suffix = self::PROC_DIR/* . $cf->id . '/'*/;
 		$proc_dir_path = trailingslashit($fi['dirname']) . $suffix;
 		$proc_file_path = $proc_dir_path .  $fi['basename'];
 		if(!is_dir($proc_dir_path))

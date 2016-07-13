@@ -136,7 +136,7 @@ class Cf7_Statifier_Public {
 //			'mail' => $cf->additional_setting('static_file_mail')[0],
 //			'mail_2' => $cf->additional_setting('static_file_mail_2')[0],
 //		);
-		$proc_path = $this->static_path_proc . $cf->id() . '/';
+		$proc_path = trailingslashit($this->static_path . $cf->id() . '/' . self::PROC_DIR);
 		$contents = array();
 		foreach (self::STATICS as $key => $item) {
 			$fp = $proc_path . $key . self::STATIC_EXT;
