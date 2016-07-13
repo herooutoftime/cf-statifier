@@ -22,7 +22,7 @@ form you can decide to *statify* your form & email contents.
 
 == Installation ==
 
-1. Upload `cf7-statifier.php` to the `/wp-content/plugins/` directory
+1. Upload/Clone `cf7-statifier` to the `/wp-content/plugins/` directory
 1. Activate the plugin through the 'Plugins' menu in WordPress
 
 == Usage ==
