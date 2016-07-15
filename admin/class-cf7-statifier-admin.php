@@ -51,6 +51,7 @@ class Cf7_Statifier_Admin {
 	);
 	const STATIC_DIR = 'cf7_static/';
 	const STATIC_EXT = '.html';
+	const STATIC_TXT = '.txt';
 	const STATIC_PERM = 0777;
 	const PROC_PERM = 0777;
 	const PROC_DIR = 'cf7_proc/';
@@ -218,7 +219,7 @@ class Cf7_Statifier_Admin {
 		$attr['html'] = $content;
 		$attr = array_merge($options, $attr);
 		$_proc = call_user_func_array(array('Premailer', 'html'), $attr);
-		
+
 		$fi = pathinfo($fp);
 		$suffix = self::PROC_DIR/* . $cf->id . '/'*/;
 		$proc_dir_path = trailingslashit($fi['dirname']) . $suffix;
@@ -226,6 +227,11 @@ class Cf7_Statifier_Admin {
 		if(!is_dir($proc_dir_path))
 			mkdir($proc_dir_path, self::PROC_PERM, true);
 		file_put_contents($proc_file_path, $_proc['html']);
+
+		$fi = pathinfo($proc_file_path);
+		$text_file = trailingslashit($fi['dirname']) . $fi['filename'] . self::STATIC_TXT;
+		file_put_contents($text_file, $_proc['plain']);
+
 		return true;
 	}
 

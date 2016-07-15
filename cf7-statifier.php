@@ -57,6 +57,8 @@ register_deactivation_hook( __FILE__, 'deactivate_cf7_statifier' );
  */
 require plugin_dir_path( __FILE__ ) . 'includes/class-cf7-statifier.php';
 
+require_once plugin_dir_path( __FILE__ ) . 'libs/wp_mail.php';
+
 /**
  * Begins execution of the plugin.
  *

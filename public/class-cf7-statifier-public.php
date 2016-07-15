@@ -40,6 +40,8 @@ class Cf7_Statifier_Public {
 	 */
 	private $version;
 
+	public $processed;
+
 	const STATICS = array(
 		'form' => 'form',
 		'mail' => 'body',
@@ -47,6 +49,7 @@ class Cf7_Statifier_Public {
 	);
 	const STATIC_DIR = 'cf7_static/';
 	const STATIC_EXT = '.html';
+	const STATIC_TXT = '.txt';
 	const STATIC_PERM = 0777;
 	const PROC_PERM = 0777;
 	const PROC_DIR = 'cf7_proc/';
@@ -113,13 +116,39 @@ class Cf7_Statifier_Public {
 
 	}
 
+//	public function phpmailer_init($phpmailer)
+//	{
+////		var_dump($phpmailer);
+////		var_dump($this->processed);
+////		$phpmailer->AltBody = "plain text\nplain text\nplain text";
+//	}
+
+	public function mail_components($cmps, $form, $t)
+	{
+		$contents = $this->get_processed($form);
+		$name = $t->name();
+		$mail_props = $form->prop($name);
+
+		$args = array(
+			'html' => $mail_props['use_html'],
+			'exclude_blank' => $mail_props['exclude_blank']
+		);
+		foreach($contents[$name] as $type => $content) {
+			$contents[$name][$type] = wpcf7_mail_replace_tags( $content, $args );
+		}
+		$cmps['body'] = $contents[$name];
+		return $cmps;
+	}
+
 	public function before_send_mail($cf)
 	{
 		$properties = $cf->get_properties();
 		$processed = $this->get_processed($cf);
+		$this->cf_id = $cf->id();
+		$this->processed = $processed;
 		foreach ($processed as $key => $item) {
 			if(!$item) continue;
-			$properties[$key]['body'] = $item;
+			$properties[$key]['body'] = $item['text/html'];
 		}
 		$properties['additional_settings'] = $properties['additional_settings'] . PHP_EOL . 'passthrough:yes';
 		$cf->set_properties($properties);
@@ -131,19 +160,18 @@ class Cf7_Statifier_Public {
 		if(!filter_var($cf->additional_setting('static_file_enabled')[0], FILTER_VALIDATE_BOOLEAN))
 			return false;
 
-//		$items = array('mail', 'mail_2');
-//		$items = array(
-//			'mail' => $cf->additional_setting('static_file_mail')[0],
-//			'mail_2' => $cf->additional_setting('static_file_mail_2')[0],
-//		);
 		$proc_path = trailingslashit($this->static_path . $cf->id() . '/' . self::PROC_DIR);
 		$contents = array();
 		foreach (self::STATICS as $key => $item) {
 			$fp = $proc_path . $key . self::STATIC_EXT;
+			$contents[$key]['text/html'] = false;
 			if(file_exists($fp)) {
-				$contents[$key] = file_get_contents($fp);
-			} else {
-				$contents[$key] = false;
+				$contents[$key]['text/html'] = file_get_contents($fp);
+			}
+			$fp_txt = $proc_path . $key . self::STATIC_TXT;
+			$contents[$key]['text/plain'] = false;
+			if(file_exists($fp_txt)) {
+				$contents[$key]['text/plain'] = file_get_contents($fp_txt);
 			}
 		}
 		return $contents;

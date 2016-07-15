@@ -27,7 +27,7 @@ form you can decide to *statify* your form & email contents.
 
 ## Usage
 
-1. Add additional settings to each CF7-form
+### Additional settings
 
 ```
 static_file_enabled: yes
@@ -41,6 +41,7 @@ static_file_mail_2_premailer: yes
 ### Premailer
 
 CF7-Statifier implements all options available through [Premailer-API](http://premailer.dialect.ca/api)
+Add like above to *Additional settings`
 
 ```
 static_file_premailer_fetchresult: yes | no

@@ -177,7 +177,9 @@ class Cf7_Statifier {
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
 
-		$this->loader->add_action( 'wpcf7_before_send_mail', $plugin_public, 'before_send_mail');
+		$this->loader->add_action( 'wpcf7_before_send_mail', $plugin_public, 'before_send_mail' );
+//		$this->loader->add_action( 'phpmailer_init', $plugin_public, 'phpmailer_init' );
+		$this->loader->add_filter( 'wpcf7_mail_components', $plugin_public, 'mail_components', 10, 3);
 	}
 
 	/**
