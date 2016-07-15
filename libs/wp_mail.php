@@ -47,11 +47,7 @@ if ( ! function_exists( 'wp_mail' ) ) {
 		 * @param array $args A compacted array of wp_mail() arguments, including the "to" email,
 		 *                    subject, message, headers, and attachments values.
 		 */
-		var_dump('before apply filter wp_mail');
-		var_dump($message);
-//		$atts = apply_filters('wp_mail', compact('to', 'subject', 'message', 'headers', 'attachments'));
-		var_dump('after apply filter wp_mail');
-		var_dump($atts['message']);
+		$atts = apply_filters_ref_array('wp_mail', compact('to', 'subject', 'message', 'headers', 'attachments'));
 		if (isset($atts['to'])) {
 			$to = $atts['to'];
 		}
@@ -71,7 +67,7 @@ if ( ! function_exists( 'wp_mail' ) ) {
 		if (isset($atts['attachments'])) {
 			$attachments = $atts['attachments'];
 		}
-		var_dump($message);
+
 		if (!is_array($attachments)) {
 			$attachments = explode("\n", str_replace("\r\n", "\n", $attachments));
 		}
@@ -259,7 +255,6 @@ if ( ! function_exists( 'wp_mail' ) ) {
 
 // Set mail's subject and body
 		$phpmailer->Subject = $subject;
-		var_dump(is_string($message));
 		if (is_string($message)) {
 			$phpmailer->Body = $message;
 
@@ -289,7 +284,6 @@ if ( ! function_exists( 'wp_mail' ) ) {
 				$phpmailer->AddCustomHeader(sprintf("Content-Type: %s;\n\t boundary=\"%s\"", $content_type, $boundary));
 		} elseif (is_array($message)) {
 			foreach ($message as $type => $bodies) {
-				var_dump($type);
 				foreach ((array)$bodies as $body) {
 					if ($type === 'text/html') {
 						$phpmailer->Body = $body;
