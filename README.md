@@ -74,7 +74,8 @@ static_file_premailer_remove_comments: no | yes
 Files will be written to the following directories (depending on your settings):
 * Form & unprocessed mail(s): `[STYLESHEET_DIRECTORY]/cf_static`
 * Processed mail(s): `[STYLESHEET_DIRECTORY]/cf_static/cf7_proc`
-
+    * These files are regenerated when saving a CF7-entry!
+    
 ## Frequently Asked Questions
 
 * **Q**: Where should I store my static files for CF7?
