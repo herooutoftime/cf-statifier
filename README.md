@@ -25,12 +25,16 @@ form you can decide to *statify* your form & email contents.
 
 ## Requirements
 
-You will either need: [http](http://php.net/manual/fa/book.http.php) or [curl](http://php.net/manual/en/book.curl.php) enabled.
+You will either need
+* [http](http://php.net/manual/fa/book.http.php)
+* [curl](http://php.net/manual/en/book.curl.php)
+PHP extension installed and enabled to use *Premailer* service.
 
 ## Installation
 
-1. Upload/Clone `cf7-statifier` to the `/wp-content/plugins/` directory
-1. Activate the plugin through the 'Plugins' menu in WordPress
+* Upload/Clone `cf7-statifier` to the `/wp-content/plugins/` directory (or download the ZIP) 
+    * `git clone --recursive git@github.com:herooutoftime/cf-statifier.git`
+* Activate the plugin through the 'Plugins' menu in WordPress
 
 ## Usage
 
