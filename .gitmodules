@@ -1,0 +1,6 @@
+[submodule "libs/premailer_curl"]
+	path = libs/premailer_curl
+	url = https://gist.github.com/1591053.git
+[submodule "libs/premailer_http"]
+	path = libs/premailer_http
+	url = https://gist.github.com/Synchro/1204853
