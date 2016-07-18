@@ -10,6 +10,9 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Make CF7 (ContactForm 7) form & emails served via static files
 
+## Special thanks
+* [barockok](https://github.com/barockok) for this GIST: https://gist.github.com/barockok/1591053
+
 ## Description
 
 This plugin was written to ease the work with Contact Form 7, one of the most popular Wordpress plugins,
@@ -19,6 +22,10 @@ form you can decide to *statify* your form & email contents.
 **Plus: You can enable `premailer` to inline all your CSS automatically**
 
 **This plugin is in an early stage. Please use with caution**
+
+## Requirements
+
+You will either need: [http](http://php.net/manual/fa/book.http.php) or [curl](http://php.net/manual/en/book.curl.php) enabled.
 
 ## Installation
 

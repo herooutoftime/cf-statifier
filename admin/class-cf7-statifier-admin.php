@@ -188,6 +188,9 @@ class Cf7_Statifier_Admin {
 		foreach ($panels as $key => &$panel) {
 			if(in_array($key, $relevant))
 				$panel['title'] = $panel['title'] . ' *';
+			if($key === 'additional-settings-panel') {
+//				var_dump($panel);
+			}
 		}
 		return $panels;
 	}

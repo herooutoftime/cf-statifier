@@ -119,7 +119,8 @@ class Cf7_Statifier {
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-cf7-statifier-public.php';
 
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'libs/premailer/Premailer.php';
+		$variant = (extension_loaded('http') && class_exists('HttpRequest') ? 'http' : 'curl');
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'libs/premailer_'. $variant .'/Premailer.php';
 
 		$this->loader = new Cf7_Statifier_Loader();
 

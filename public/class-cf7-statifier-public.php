@@ -136,6 +136,7 @@ class Cf7_Statifier_Public {
 		foreach($contents[$name] as $type => $content) {
 			$contents[$name][$type] = wpcf7_mail_replace_tags( $content, $args );
 		}
+		$cmps['body'] = array();
 		$cmps['body'] = $contents[$name];
 		return $cmps;
 	}
