@@ -19,7 +19,9 @@ This plugin was written to ease the work with Contact Form 7, one of the most po
 by making all HTML related content available through static files. By placing additional settings in each
 form you can decide to *statify* your form & email contents.
 
-**Plus: You can enable `premailer` to inline all your CSS automatically**
+* Your forms and mails will be available through your filesystem and therefore easy to edit.
+* You can enable `premailer` to inline all your CSS automatically for each email you want to send.
+* With `premailer` enabled your emails will be `multipart`: HTML & plain text
 
 **This plugin is in an early stage. Please use with caution**
 
@@ -28,17 +30,18 @@ form you can decide to *statify* your form & email contents.
 You will either need
 * [http](http://php.net/manual/fa/book.http.php)
 * [curl](http://php.net/manual/en/book.curl.php)
+
 PHP extension installed and enabled to use *Premailer* service.
 
 ## Installation
 
-* Upload/Clone `cf7-statifier` to the `/wp-content/plugins/` directory (or download the ZIP) 
-    * `git clone --recursive git@github.com:herooutoftime/cf-statifier.git`
+* Clone `cf7-statifier` to the `/wp-content/plugins/` directory: `git clone git@github.com:herooutoftime/cf-statifier.git`
+* Or download the [ZIP](https://github.com/herooutoftime/cf-statifier/archive/master.zip) and upload to `wp-content/plugins/`
 * Activate the plugin through the 'Plugins' menu in WordPress
 
 ## Usage
 
-### Additional settings
+### CF7-Statifier settings
 
 ```
 static_file_enabled: yes
@@ -49,7 +52,7 @@ static_file_mail_2: yes
 static_file_mail_2_premailer: yes
 ```
 
-### Premailer
+### Premailer settings
 
 CF7-Statifier implements all options available through [Premailer-API](http://premailer.dialect.ca/api)
 Add like above to *Additional settings`
@@ -66,19 +69,11 @@ static_file_premailer_remove_classes: no | yes
 static_file_premailer_remove_comments: no | yes
 ```
 
-The plugin listens to several actions:
-* `wpcf7_after_save`: Saves the static file(s) and creates, if set, processed mail(s)
-* `wpcf7_before_send_mail`: Fetches the static mail(s)
-
-The plugins manipulates CF7's properties:
-* `wpcf7_contact_form_properties`: Show the contents of the static file(s) instead of DB-contents
+### Static files
 
 Files will be written to the following directories (depending on your settings):
 * Form & unprocessed mail(s): `[STYLESHEET_DIRECTORY]/cf_static`
 * Processed mail(s): `[STYLESHEET_DIRECTORY]/cf_static/cf7_proc`
-
-For compatibility with common mail-clients (e.g. Outlook, Gmail, Apple Mail) you are able to set `static_file_[MAIL_ID]_premailer: yes`
-When saving (via WP-Admin) a folder with the processed contents of each mail will be stored and fetched on submit.
 
 ## Frequently Asked Questions
 
